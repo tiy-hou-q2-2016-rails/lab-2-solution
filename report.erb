@@ -16,5 +16,43 @@
       <li>fry (<%= fry_count %>): <%= fry_total * 0.1 %></li>
     </ul>
 
+    <h2>Shipments</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Destination
+          </th>
+          <th>
+            Shipment
+          </th>
+          <th>
+            Crates
+          </th>
+          <th>
+            Money
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% shipments.each do |shipment| %>
+          <tr>
+            <td>
+              <%= shipment["Destination"] %>
+            </td>
+            <td>
+              <%= shipment["Shipment"] %>
+            </td>
+            <td>
+              <%= shipment["Crates"] %>
+            </td>
+            <td>
+              <%= shipment["Money"] %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
   </body>
 </html>
