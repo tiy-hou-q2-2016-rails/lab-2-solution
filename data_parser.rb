@@ -15,6 +15,25 @@ all_shipment_revenue = shipments.map do |shipment|
   shipment["Money"].to_i
 end
 
+fry_total = 0
+bender_total = 0
+leela_total = 0
+amy_total = 0
+
+shipments.each do |shipment|
+  if shipment["Destination"] == "Earth"
+    fry_total += shipment["Money"].to_i
+  elsif shipment["Destination"] == "Mars"
+    amy_total += shipment["Money"].to_i
+  elsif shipment["Destination"] == "Uranus"
+    bender_total += shipment["Money"].to_i
+  else
+    leela_total += shipment["Money"].to_i
+  end
+end
+
+
+
 # all_shipment_review => an array of integers
 total_revenue = all_shipment_revenue.reduce(:+)
 
