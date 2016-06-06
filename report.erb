@@ -47,6 +47,36 @@
         <li>fry (<%= fry_count %>): <%= fry_total * 0.1 %></li>
       </ul>
 
+      <h2>Revenue By Planet</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>
+              Planet Name
+            </th>
+            <th>
+              Total
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% revenue_by_planet.each do |hash| %>
+            <tr>
+              <td>
+                <%= hash["name"] %>
+              </td>
+              <td>
+                <%= hash["total"] %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <ul>
+
+      </ul>
+
       <h2>Shipments</h2>
       <table>
         <thead>

@@ -28,17 +28,21 @@ amy_total = 0
 amy_count = 0
 
 shipments.each do |shipment|
-  if shipment["Destination"] == "Earth"
-    fry_total += shipment["Money"].to_i
+
+  money = shipment["Money"].to_i
+
+  case shipment["Destination"]
+  when "Earth"
+    fry_total += money
     fry_count += 1
-  elsif shipment["Destination"] == "Mars"
-    amy_total += shipment["Money"].to_i
+  when "Mars"
+    amy_total += money
     amy_count += 1
-  elsif shipment["Destination"] == "Uranus"
-    bender_total += shipment["Money"].to_i
+  when "Uranus"
+    bender_total += money
     bender_count += 1
   else
-    leela_total += shipment["Money"].to_i
+    leela_total += money
     leela_count += 1
   end
 end
@@ -47,7 +51,24 @@ end
 # all_shipment_review => an array of integers
 total_revenue = all_shipment_revenue.reduce(:+)
 
-puts "Total Revenue #{total_revenue}"
+all_shipments_for_earth = shipments.select do |shipment|
+  shipment["Destination"] == "Earth"
+end
+all_shipment_for_earth_revenue = all_shipments_for_earth.map do |shipment|
+  shipment["Money"].to_i
+end
+
+
+revenue_by_planet = []
+planets = shipments.map { |shipment| shipment["Destination"] }.uniq
+planets.each do |planet|
+  planet_revenue = shipments
+                      .select { |shipment|  shipment["Destination"] == planet }
+                      .map {|shipment| shipment["Money"].to_i }
+                      .reduce(:+)
+  revenue_by_planet << { "name" => planet, "total" => planet_revenue }
+end
+
 
 # generate the HTML
 
