@@ -11,9 +11,7 @@ end
 # perform all the calculations I need
 
 # shipments => an array of records, where each record is a hash
-all_shipment_revenue = shipments.map do |shipment|
-  shipment["Money"].to_i
-end
+
 
 fry_total = 0
 fry_count = 0
@@ -47,17 +45,7 @@ shipments.each do |shipment|
   end
 end
 
-
-# all_shipment_review => an array of integers
-total_revenue = all_shipment_revenue.reduce(:+)
-
-all_shipments_for_earth = shipments.select do |shipment|
-  shipment["Destination"] == "Earth"
-end
-all_shipment_for_earth_revenue = all_shipments_for_earth.map do |shipment|
-  shipment["Money"].to_i
-end
-
+total_revenue = shipments.map {|shipment| shipment["Money"].to_i}.reduce(:+)
 
 revenue_by_planet = []
 planets = shipments.map { |shipment| shipment["Destination"] }.uniq
